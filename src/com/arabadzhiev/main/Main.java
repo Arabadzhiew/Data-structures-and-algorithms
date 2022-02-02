@@ -1,30 +1,44 @@
 package com.arabadzhiev.main;
 
-import com.arabadzhiev.collections.HashMap;
+
+
+import com.arabadzhiev.algorithms.linkedLists.*;
+import com.arabadzhiev.collections.*;
 
 public class Main {
 	
-	public static void main(String[] args) {
-		HashMap<Integer, String> map = new HashMap<>();
+	public static void main(String[] args){
 		
-		map.add(1, "turciq");
-		map.add(2, "bulgaria");
-		map.add(122, "uk");
-		map.add(-10, "us");
-		map.add(222, "bangladesh");
-		map.add(123, "india");
-		map.add(1111, "pakistani");
-		map.add(2, "abu dabi");
-		map.add(122, "romaina");
+		long before = System.nanoTime();
 		
-		System.out.println(map.contains(1));
-		System.out.println(map.contains(2));
-		System.out.println(map.contains(3));
-		System.out.println(map.contains(122));
-		System.out.println();
+		LinkedListNode<String> node = new LinkedListNode<>("A");
+		node.setNext(new LinkedListNode<>("B"));
+		node.getNext().setNext(new LinkedListNode<>("C"));
+		node.getNext().getNext().setNext(new LinkedListNode<>("D"));
+		node.getNext().getNext().getNext().setNext(new LinkedListNode<>("E"));
+		LinkedListNode<String> loop = node.getNext().getNext();
+//		node.getNext().getNext().getNext().getNext().setNext(loop);
+		node.getNext().getNext().getNext().getNext().setNext(new LinkedListNode<>("F"));
 		
-		for(String s : map) {
-			System.out.println(s);
+		
+		try {
+			System.out.println(LoopDetection.findLoop(node).getValue());
+		}catch(NullPointerException e) {
+			System.out.println("null");
+		}
+
+				
+		long after = System.nanoTime();
+		
+		System.out.println("\n" + (after - before));
+	}
+	
+	public static void printMatrix(int[][] matrix) {
+		for(int i = 0; i < matrix.length; i++) {
+			for(int j = 0; j < matrix[0].length; j++) {
+				System.out.print(" " + matrix[i][j]);
+			}
+			System.out.println();
 		}
 	}
 }

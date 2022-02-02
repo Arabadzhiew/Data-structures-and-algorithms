@@ -25,6 +25,7 @@ public class HashMap <K, V> implements Iterable<V>{
 		if(storage[hash] == null) {
 			storage[hash] = new ArrayList<Node>();
 		}
+		
 		storage[hash].add(insertionNode);
 		size++;
 	}

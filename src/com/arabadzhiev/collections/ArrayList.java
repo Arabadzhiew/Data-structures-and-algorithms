@@ -48,6 +48,15 @@ public class ArrayList<T> implements Iterable<T>{
 		takeSpace(index);
 	}
 	
+	public boolean contains(T value) {
+		for(Object o : buffer) {
+			if(o.equals(value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public int getSize() {
 		return this.size;
 	}
@@ -62,6 +71,16 @@ public class ArrayList<T> implements Iterable<T>{
 			
 			buffer = newArray;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T[] toArray() {
+		Object[] returnArray = new Object[size];
+		for(int i = 0; i < size; i++) {
+			returnArray[i] = buffer[i];
+		}
+		
+		return (T[])returnArray;
 	}
 	
 	private void checkIndex(int index, int size) {

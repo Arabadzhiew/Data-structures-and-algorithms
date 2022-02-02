@@ -81,6 +81,33 @@ public class LinkedList<T> implements Iterable<T>{
 		return this.first;
 	}
 	
+	public void remove(int index) {
+		if(index >= size) {
+			throw new IndexOutOfBoundsException("Index: " + index + " out of bounds for Size: " + this.size);
+		}
+		
+		if(index == 0) {
+			this.first = this.first.getNext();
+			size--;
+			return;
+		}
+		
+		Node<T> node = this.getFirstNode();
+		
+		for(int i = 0; i < index - 1; i++) {
+			node = node.getNext();
+		}
+		
+		Node<T> removeNode = node.getNext();
+		Node<T> replaceNode = removeNode.getNext();
+		
+		node.setNext(replaceNode);
+		if(replaceNode == null) {
+			this.last = node;
+		}
+		size--;
+	}
+	
 	public int getSize() {
 		return this.size;
 	}
@@ -105,7 +132,7 @@ public class LinkedList<T> implements Iterable<T>{
 		return new Iter();
 	}
 	
-	private class Node<E>{
+	public static class Node<E>{
 		private E value;
 		private Node<E> next;
 		
@@ -136,7 +163,7 @@ public class LinkedList<T> implements Iterable<T>{
 	
 	private class Iter implements Iterator<T>{
 		
-		Node<T> cursor = current;
+		Node<T> cursor = first;
 
 		@Override
 		public boolean hasNext() {
