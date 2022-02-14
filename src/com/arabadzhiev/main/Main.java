@@ -37,6 +37,8 @@ import com.arabadzhiev.ood.JukeboxDisk;
 import com.arabadzhiev.ood.Manager;
 import com.arabadzhiev.ood.MusicPlayer;
 import com.arabadzhiev.ood.Respondent;
+import com.arabadzhiev.recursion.RobotGrid;
+import com.arabadzhiev.recursion.Staircase;
 import com.arabadzhiev.ood.Card.Rank;
 import com.arabadzhiev.ood.Card.Suit;
 import com.arabadzhiev.ood.CircularArray;
@@ -47,23 +49,35 @@ public class Main {
 		
 		long before = System.nanoTime();
 		
-		HashTable<String, Integer> table = new HashTable<>();
-		table.add("a", 1);
-		table.add("ac", 10);
-		table.add("asd", 23);
-		table.add("abb", 1112);
-		table.add("nanagu", 123456);
-		table.add("Petar", 201);
-		table.add("arr", 1234567);
-		table.add("har", 123456);
-		table.add("sarrm", 123456);
-		table.add("maqsale", 321123);
+		char[][] grid =	new char[][]{
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ',' ',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{'@',' ','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ','@','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ',' ',' ',' ',' ',' ',' ',' '},
+						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ',' ',' ','@',' ',' ',' ',' '},
+									};
 		
-		
-		
-		System.out.println(table.get("maqsale"));
-		System.out.println(table.remove("a"));
-		System.out.println(table.get("abb"));
+		for(int[] array : RobotGrid.findPath(grid)	) {
+			for(int i : array) {
+				System.out.print(i + " ");
+			}
+			System.out.println();
+		}
 		
 		long after = System.nanoTime();
 		
@@ -240,5 +254,24 @@ public class Main {
 		reverseArrayRecursively(array, index + 1);
 		
 		array[array.length - index - 1] = current;
+	}
+	
+	public static long fibonacci(int n) {
+		return fibonacci(n, new long[n + 1]);
+	}
+	
+	public static long fibonacci(int n, long[] pastSeqs) {
+		if(n == 0) {
+			return 0;
+		}
+		if(n == 1) {
+			return 1;
+		}
+		
+		if(pastSeqs[n] == 0) {
+			pastSeqs[n] = fibonacci(n - 1, pastSeqs) + fibonacci(n - 2, pastSeqs);
+		}
+		
+		return pastSeqs[n];
 	}
 }
