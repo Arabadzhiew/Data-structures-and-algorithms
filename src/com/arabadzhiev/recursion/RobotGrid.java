@@ -5,7 +5,7 @@ public class RobotGrid {
 	
 	public static int[][] findPath(char[][] grid) {
 		int[][] memo = new int[grid.length][grid[0].length];
-		findPath(grid, 0, 0, memo);
+		System.out.println(findPath(grid, 0, 0, memo));
 		return memo;
 	}
 	

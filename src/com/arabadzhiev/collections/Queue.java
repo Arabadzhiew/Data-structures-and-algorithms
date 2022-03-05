@@ -4,8 +4,8 @@ import java.util.NoSuchElementException;
 
 public class Queue<T> {
 	
-	QueueNode<T> beggining;
-	QueueNode<T> end;
+	private QueueNode<T> beggining;
+	private QueueNode<T> end;
 	
 	public void add(T value) {
 		QueueNode<T> n = new QueueNode<>(value);

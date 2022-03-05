@@ -1,6 +1,5 @@
 package com.arabadzhiev.math;
 
-import java.util.Random;
 
 public class Apocalypse {
 	

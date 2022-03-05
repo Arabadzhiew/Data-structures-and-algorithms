@@ -2,9 +2,11 @@ package com.arabadzhiev.main;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
+import com.arabadzhiev.algorithms.arrays.Array;
 import com.arabadzhiev.bitman.BinaryInsertion;
 import com.arabadzhiev.bitman.BitsToSwap;
 import com.arabadzhiev.bitman.DoublePrintBinary;
@@ -16,11 +18,14 @@ import com.arabadzhiev.collections.BinaryTreeNode;
 import com.arabadzhiev.collections.Graph;
 import com.arabadzhiev.collections.Graph.Node;
 import com.arabadzhiev.collections.LinkedListNode;
+import com.arabadzhiev.collections.Listy;
 import com.arabadzhiev.collections.TreeNode;
 import com.arabadzhiev.grandtr.Graphs;
 import com.arabadzhiev.grandtr.Graphs.Project;
 import com.arabadzhiev.grandtr.RandomBinarySearchTree;
 import com.arabadzhiev.grandtr.Trees;
+import com.arabadzhiev.lambda.Country;
+import com.arabadzhiev.lambda.RandomSubset;
 import com.arabadzhiev.math.Apocalypse;
 import com.arabadzhiev.minesweeper.Board;
 import com.arabadzhiev.minesweeper.Game;
@@ -37,8 +42,28 @@ import com.arabadzhiev.ood.JukeboxDisk;
 import com.arabadzhiev.ood.Manager;
 import com.arabadzhiev.ood.MusicPlayer;
 import com.arabadzhiev.ood.Respondent;
+import com.arabadzhiev.recursion.Cents;
+import com.arabadzhiev.recursion.Fill;
+import com.arabadzhiev.recursion.Hanoi;
+import com.arabadzhiev.recursion.MagicIndex;
+import com.arabadzhiev.recursion.Mathematics;
+import com.arabadzhiev.recursion.Parentheses;
+import com.arabadzhiev.recursion.PowerSet;
 import com.arabadzhiev.recursion.RobotGrid;
 import com.arabadzhiev.recursion.Staircase;
+import com.arabadzhiev.recursion.StringPermutations;
+import com.arabadzhiev.sortandsearch.Anagrams;
+import com.arabadzhiev.sortandsearch.FindDuplicates;
+import com.arabadzhiev.sortandsearch.ListySearch;
+import com.arabadzhiev.sortandsearch.MatrixSearch;
+import com.arabadzhiev.sortandsearch.MatrixSearch.Location;
+import com.arabadzhiev.sortandsearch.Merge;
+import com.arabadzhiev.sortandsearch.PeaksAndValleys;
+import com.arabadzhiev.sortandsearch.RotatedSearch;
+import com.arabadzhiev.sortandsearch.SparseSearch;
+import com.arabadzhiev.threads.A;
+import com.arabadzhiev.threads.FizzBuzz;
+import com.arabadzhiev.threads.OrderCall;
 import com.arabadzhiev.ood.Card.Rank;
 import com.arabadzhiev.ood.Card.Suit;
 import com.arabadzhiev.ood.CircularArray;
@@ -47,41 +72,16 @@ public class Main {
 	
 	public static void main(String[] args){
 		
+		
 		long before = System.nanoTime();
 		
-		char[][] grid =	new char[][]{
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ',' ',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{'@',' ','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ','@','@',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ','@',' ','@',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ',' ',' ',' ',' ',' ',' ',' '},
-						{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','@',' ',' ',' ','@',' ',' ',' ',' '},
-									};
+		FizzBuzz fb = new FizzBuzz();
 		
-		for(int[] array : RobotGrid.findPath(grid)	) {
-			for(int i : array) {
-				System.out.print(i + " ");
-			}
-			System.out.println();
-		}
+		fb.fizzBuzz(230);
 		
 		long after = System.nanoTime();
 		
-		System.out.println("\n" + (after - before));
+//		System.out.println("\n" + (after - before));
 	}
 	
 	public static void printMatrix(int[][] matrix) {
@@ -215,10 +215,10 @@ public class Main {
 		
 		return sb.toString();
 	}
-	private static StringBuilder reverseString(String s, StringBuilder sb, int index) {
+	private static void reverseString(String s, StringBuilder sb, int index) {
 		if(index + 1 == s.length()) {
 			sb.append(s.charAt(index));
-			return sb;
+			return;
 		}
 		
 		char current = s.charAt(index);
@@ -226,7 +226,6 @@ public class Main {
 		reverseString(s, sb, index + 1);
 		
 		sb.append(current);
-		return sb;
 	}
 	
 	public static <T> void reverseArray(T[] array) {
@@ -273,5 +272,27 @@ public class Main {
 		}
 		
 		return pastSeqs[n];
+	}
+	
+	public static <T> LinkedListNode<T> reverseLinkedList(LinkedListNode<T> head){
+		
+		if(head == null) {
+			return null;
+		}
+		
+		LinkedListNode<T> previous = null;
+		
+		while(head.getNext() != null) {
+			LinkedListNode<T> next = head.getNext();
+			
+			head.setNext(previous);
+			
+			previous = head;
+			head = next;
+		}
+		
+		head.setNext(previous);
+		
+		return head;
 	}
 }
