@@ -6,55 +6,106 @@ import java.util.List;
 public class Array {
 	
 	public static void mergeSort(int[] arr) {
-		mergeSort(arr, 0, arr.length);
+		mergeSort(arr, 0 , arr.length);
 	}
 	
-	private static void mergeSort(int[] arr, int left, int right){
-		
+	private static void mergeSort(int[] arr, int left, int right) {
 		if(right - left < 2) {
 			return;
 		}
 		
 		int middle = (left + right) / 2;
 		
-		
-		mergeSort(arr, left, middle);
 		mergeSort(arr, middle, right);
+		mergeSort(arr, left, middle);
 		
-		merge(arr, left, middle, right);
+		merge(arr, left, right);
 	}
 	
-	private static void merge(int[] arr, int left, int middle, int right) {
+	private static void merge(int[] arr, int left, int right) {
 		
 		int[] merged = new int[right - left];
-		int i = left;
-		int j = middle;
 		
-		for(int k = 0; k < merged.length; k++) {
-			if(i < middle && j < right) {
-				if(arr[i] < arr[j]) {
-					merged[k] = arr[i];
-					i++;
-				}else if(arr[i] >= arr[j]) {
-					merged[k] = arr[j];
-					j++;
+		int middle = (left + right) / 2;
+		
+		int j = left;
+		int k = middle;
+		
+		for(int i = 0; i < merged.length; i++) {
+			if(j < middle && k < right) {
+				if(arr[j] < arr[k]) {
+					merged[i] = arr[j];
+					j++; 
+				}else {
+					merged[i] = arr[k];
+					k++;
 				}
-			}else if(i < middle) {
-				merged[k] = arr[i];
-				i++;
-			}else if(j < right) {
-				merged[k] = arr[j];
+			}else if(j < middle) {
+				merged[i] = arr[j];
 				j++;
+			}else if(k < right){
+				merged[i] = arr[k];
+				k++;
 			}
 		}
 		
-		for(int k = left; k < right; k++) {
-			arr[k] = merged[k - left];
+		for(int i = 0; i < merged.length; i++) {
+			arr[i + left] = merged[i];
 		}
+		
+		
 	}
 	
+//	public static void mergeSort(int[] arr) {
+//		mergeSort(arr, 0, arr.length);
+//	}
+//	
+//	private static void mergeSort(int[] arr, int left, int right){
+//		
+//		if(right - left < 2) {
+//			return;
+//		}
+//		
+//		int middle = (left + right) / 2;
+//		
+//		
+//		mergeSort(arr, left, middle);
+//		mergeSort(arr, middle, right);
+//		
+//		merge(arr, left, middle, right);
+//	}
+//	
+//	private static void merge(int[] arr, int left, int middle, int right) {
+//		
+//		int[] merged = new int[right - left];
+//		int i = left;
+//		int j = middle;
+//		
+//		for(int k = 0; k < merged.length; k++) {
+//			if(i < middle && j < right) {
+//				if(arr[i] < arr[j]) {
+//					merged[k] = arr[i];
+//					i++;
+//				}else if(arr[i] >= arr[j]) {
+//					merged[k] = arr[j];
+//					j++;
+//				}
+//			}else if(i < middle) {
+//				merged[k] = arr[i];
+//				i++;
+//			}else if(j < right) {
+//				merged[k] = arr[j];
+//				j++;
+//			}
+//		}
+//		
+//		for(int k = left; k < right; k++) {
+//			arr[k] = merged[k - left];
+//		}
+//	}
+	
 	public static void quickSort(int[] arr) {
-		if(arr.length < 1) {
+		if(arr.length < 2) {
 			return;
 		}
 		
@@ -70,25 +121,38 @@ public class Array {
 			}
 		}
 		
-		int leftArr[] = new int[left.size()];
-		int rightArr[] = new int[right.size()];
 		
-		for(int i = 0; i < left.size(); i++) {
-			leftArr[i] = left.get(i);
-		}
-		for(int i = 0; i < right.size(); i++) {
-			rightArr[i] = right.get(i);
-		}
+		int leftArr[] = left.stream()
+							.mapToInt(i -> i.intValue())
+							.toArray();
+		int rightArr[] = right.stream()
+							.mapToInt(i -> i.intValue())
+							.toArray();
+		
+		
+//		for(int i = 0; i < left.size(); i++) {
+//			leftArr[i] = left.get(i);
+//		}
+//		for(int i = 0; i < right.size(); i++) {
+//			rightArr[i] = right.get(i);
+//		}
 		
 		quickSort(leftArr);
 		quickSort(rightArr);
 		
+		int arrIndex = 0;
+		
 		for(int i = 0; i < leftArr.length; i++) {
-			arr[i] = leftArr[i];
+			arr[arrIndex] = leftArr[i];
+			arrIndex++;
 		}
-		arr[leftArr.length] = pivot;
-		for(int i = leftArr.length + 1; i < arr.length; i++) {
-			arr[i] = rightArr[i - leftArr.length - 1];
+		
+		arr[arrIndex] = pivot;
+		arrIndex++;
+		
+		for(int i = 0; i < rightArr.length; i++) {
+			arr[arrIndex] = rightArr[i];
+			arrIndex++;
 		}
 	}
 	

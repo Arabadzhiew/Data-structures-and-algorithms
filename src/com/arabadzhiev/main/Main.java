@@ -1,10 +1,14 @@
 package com.arabadzhiev.main;
 
+import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 import com.arabadzhiev.algorithms.arrays.Array;
 import com.arabadzhiev.bitman.BinaryInsertion;
@@ -22,6 +26,7 @@ import com.arabadzhiev.collections.Listy;
 import com.arabadzhiev.collections.TreeNode;
 import com.arabadzhiev.grandtr.Graphs;
 import com.arabadzhiev.grandtr.Graphs.Project;
+import com.arabadzhiev.grandtr.MaxBinaryTreeWidth;
 import com.arabadzhiev.grandtr.RandomBinarySearchTree;
 import com.arabadzhiev.grandtr.Trees;
 import com.arabadzhiev.lambda.Country;
@@ -53,6 +58,7 @@ import com.arabadzhiev.recursion.RobotGrid;
 import com.arabadzhiev.recursion.Staircase;
 import com.arabadzhiev.recursion.StringPermutations;
 import com.arabadzhiev.sortandsearch.Anagrams;
+import com.arabadzhiev.sortandsearch.BinarySearch;
 import com.arabadzhiev.sortandsearch.FindDuplicates;
 import com.arabadzhiev.sortandsearch.ListySearch;
 import com.arabadzhiev.sortandsearch.MatrixSearch;
@@ -73,15 +79,20 @@ public class Main {
 	public static void main(String[] args){
 		
 		
+		int[] array = {3,1,6,1,7,2,3,3, -1, 10, 11, 5, 8 , 9, 4 , 0};
+		
 		long before = System.nanoTime();
 		
-		FizzBuzz fb = new FizzBuzz();
-		
-		fb.fizzBuzz(230);
+		Array.quickSort(array);
 		
 		long after = System.nanoTime();
 		
-//		System.out.println("\n" + (after - before));
+		System.out.println("Execution time: " + (after - before) + "ns\n");
+		
+		Arrays.stream(array)
+			.forEach(num -> System.out.println(num));
+		
+		
 	}
 	
 	public static void printMatrix(int[][] matrix) {
